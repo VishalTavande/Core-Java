@@ -1,0 +1,9 @@
+22, Data Structures, 45
+23, English, 52
+22, English, 51
+26, Data Structures, 72
+23, Data Structures, 61
+20, C++, 25
+24, English, 81
+23, Mathematics, 65
+21, Java, 90
