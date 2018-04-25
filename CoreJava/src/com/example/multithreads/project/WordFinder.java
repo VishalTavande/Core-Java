@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 
+/***
+ * @author Vishal Tavande
+ * @since 25-Apr-2018
+ */
 public class WordFinder implements Callable<List<String>> {
 
 	private static List<String> fileList;
