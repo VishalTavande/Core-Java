@@ -1,4 +1,4 @@
-package com.example.multithreads.synchronization;
+package com.example.multithreading.synchronization;
 
 
 

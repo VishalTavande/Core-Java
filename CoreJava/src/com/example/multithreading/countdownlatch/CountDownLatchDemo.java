@@ -1,4 +1,4 @@
-package com.example.multithreads.countdownlatch;
+package com.example.multithreading.countdownlatch;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;

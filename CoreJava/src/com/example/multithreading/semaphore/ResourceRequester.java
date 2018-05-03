@@ -1,4 +1,4 @@
-package com.example.multithreads.semaphore;
+package com.example.multithreading.semaphore;
 
 public class ResourceRequester implements Runnable {
 

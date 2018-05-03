@@ -1,4 +1,4 @@
-package com.example.multithreads.project;
+package com.example.multithreading.project;
 
 import java.io.BufferedReader;
 import java.io.File;

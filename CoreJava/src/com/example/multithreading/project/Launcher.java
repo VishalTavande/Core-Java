@@ -1,4 +1,4 @@
-package com.example.multithreads.project;
+package com.example.multithreading.project;
 
 import java.util.LinkedList;
 import java.util.List;

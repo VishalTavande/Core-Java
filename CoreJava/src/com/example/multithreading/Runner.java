@@ -1,4 +1,4 @@
-package com.example.multithreads;
+package com.example.multithreading;
 
 public class Runner implements Runnable {
 

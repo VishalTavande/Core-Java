@@ -87,6 +87,7 @@ public class Main {
        
        for(Person p : list) 
     	  System.out.println(p.toString());
+
     }
     
 }

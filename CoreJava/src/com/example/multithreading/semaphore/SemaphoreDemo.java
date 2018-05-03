@@ -1,4 +1,4 @@
-package com.example.multithreads.semaphore;
+package com.example.multithreading.semaphore;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
