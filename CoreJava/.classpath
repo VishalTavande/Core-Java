@@ -2,7 +2,5 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_79"/>
-	<classpathentry kind="lib" path="C:/APRM_PBG/v100_0_PB0/gprmPortal/proj/gprmPortal1000/dist/aprm-portal-web/target/weblogic/aprm-portal-web-1.0-SNAPSHOT/WEB-INF/lib/aprm-portal-business-1.0-SNAPSHOT-client.jar"/>
-	<classpathentry kind="lib" path="C:/APRM_PBG/v100_0_PB0/gprmPortal/src/install/lib/wlfullclient.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
