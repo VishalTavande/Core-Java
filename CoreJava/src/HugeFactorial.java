@@ -58,22 +58,28 @@ public class HugeFactorial {
 	}
 
 	private static void addToExisting(int digit, int secondNumberDigits, List result) {
+		List head = result;
 		while(secondNumberDigits>0) {
 			result = result.next;
 			secondNumberDigits--;
 		}
-		int sum, carry = digit;
+		int sum, carry = 0;
 		while(result != null && (sum=result.data+digit)>9) {
 			result.data = sum%10 + carry;
 			carry = sum/10;
+			digit = carry;
 			result = result.next;
 		}
-		if(carry > 0) {
-			if(result != null) {
-				result.data; 
-			}
+		
+		if(result != null) {
+			result.data = result.data+digit;
+			return;
 		}
-			
+		else {
+			insert(digit, head);
+		}
+		
+		
 	}
 
 }
