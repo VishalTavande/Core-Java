@@ -4,8 +4,8 @@ public class FactoryDemo {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Vehicle car =  VehicleFactory.getVehicle("Luxury", "Car", "1005-A", "Audi S5", 30000000);
-		Vehicle truck =  VehicleFactory.getVehicle("Heavyload", "Truck", "5005-Z", "Tata truck", 1500000);
+		Vehicle car =  MyVehicleFactory.getVehicle("Luxury", "Car", "1005-A", "Audi S5", 30000000);
+		Vehicle truck =  MyVehicleFactory.getVehicle("Heavyload", "Truck", "5005-Z", "Tata truck", 1500000);
 		
 		System.out.println("Car details are: " + car);
 		System.out.println("Truck details are: " + truck);
@@ -92,7 +92,7 @@ class Truck extends Vehicle {
 	}
 }
 
-class VehicleFactory {
+class MyVehicleFactory {
 	public static Vehicle getVehicle(String category, String type, String chessisNumber, String model, double price) {
 		if(category.equalsIgnoreCase("Luxury")) {
 			return new Car(type, chessisNumber, model, price);
