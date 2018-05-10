@@ -5,13 +5,18 @@ public class HugeFactorial {
 	public static void main(String[] args) {
 		
 		Scanner scan = new Scanner(System.in);
-			
-		List firstNumber = convertToList(scan.nextInt());
-		List secondNumber = convertToList(scan.nextInt());
+		int number = scan.nextInt();
+		List firstNumber = convertToList(1);
+		List secondNumber = convertToList(2);
 		
-		List result = multiply(firstNumber, secondNumber);
-		
-		result = reverseList(result);
+		int no = 3; 
+		while(no <= number+1) {
+			secondNumber = multiply(secondNumber, firstNumber);
+			firstNumber = convertToList(no);
+			no++;
+		}
+	
+		List result = reverseList(secondNumber);
 		displayList(result);
 		scan.close();
 
@@ -101,9 +106,15 @@ public class HugeFactorial {
 			
 			secondNumber = secondNumber.next;
 			secondNumberDigits++;
-		
+			/*int no=secondNumberDigits;
+			currRef = result;*/
+			
 			resultTmp = resultTmp.next;
 			currRef = resultTmp;
+			/*while(no>0 && currRef != null) {
+				currRef = currRef.next;
+				no--;
+			}*/
 		}
 		return result;
 	}
