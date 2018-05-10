@@ -3,19 +3,18 @@ import java.util.Scanner;
 public class HugeFactorial {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
 		Scanner scan = new Scanner(System.in);
-		
+			
 		List firstNumber = convertToList(scan.nextInt());
 		List secondNumber = convertToList(scan.nextInt());
 		
 		List result = multiply(firstNumber, secondNumber);
 		
 		result = reverseList(result);
-		System.out.println("Answer is:");
 		displayList(result);
-		
+		scan.close();
+
 	}
 	
 	private static List reverseList(List result) {
@@ -62,20 +61,32 @@ public class HugeFactorial {
 	}
 	
 	private static List multiply(List firstNumber, List secondNumber) {
+		
+		if(firstNumber == null || secondNumber == null) {
+			if(firstNumber == null)
+				return secondNumber;
+			return firstNumber;
+		}
+		
 		List result = null;
 		List currRef = null;
+		List resultTmp = null;
 		int secondNumberDigits = 0;
 		while(secondNumber != null) {
 			List firstTmp = firstNumber;
 			int carry = 0;
 			while(firstTmp != null) {
 				int digit = (secondNumber.data * firstTmp.data) + carry;
-				if(digit > 9) {
-					carry = digit/10;
-					digit = digit%10;
-				}
-				if(secondNumberDigits == 0)
+				carry = 0;
+				if(secondNumberDigits == 0) {
+					if(digit > 9) {
+						carry = digit/10;
+						digit = digit%10;
+					}
 					result = insert(digit, result);
+					if(resultTmp == null)
+						resultTmp = result;
+				}
 				else 
 					currRef = addToExisting(digit, currRef, result);
 				
@@ -90,22 +101,19 @@ public class HugeFactorial {
 			
 			secondNumber = secondNumber.next;
 			secondNumberDigits++;
-			int no=secondNumberDigits;
-			currRef = result;
-			
-			while(no>0 && currRef != null) {
-				currRef = currRef.next;
-				no--;
-			}
+		
+			resultTmp = resultTmp.next;
+			currRef = resultTmp;
 		}
 		return result;
 	}
+
 
 	private static List addToExisting(int digit, List currRef, List result) {
 		List head = currRef;
 		int sum, carry = 0;
 		while(currRef != null && (sum=currRef.data+digit)>9) {
-			currRef.data = sum%10 + carry;
+			currRef.data = sum%10;
 			carry = sum/10;
 			digit = carry;
 			currRef = currRef.next;
@@ -116,9 +124,8 @@ public class HugeFactorial {
 		}
 		else {
 			currRef = insert(digit, result);
-			return currRef;
 		}
-		return currRef.next;
+		return head!= null ? head.next : head;
 	}
 	
 	
