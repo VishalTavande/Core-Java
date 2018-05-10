@@ -1,26 +1,54 @@
+import java.util.Scanner;
 
 public class HugeFactorial {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+		Scanner scan = new Scanner(System.in);
+		
+		List firstNumber = convertToList(scan.nextInt());
+		List secondNumber = convertToList(scan.nextInt());
+		
+		List result = multiply(firstNumber, secondNumber);
+		
+		result = reverseList(result);
+		System.out.println("Answer is:");
+		displayList(result);
+		
 	}
 	
+	private static List reverseList(List result) {
+		List current = result;
+		List next = current.next;
+			
+		while(next != null) {
+			if(current == result) {
+					current.next = null;
+			}
+			List tmp = next.next;
+			next.next = current;
+			current = next;
+			next = tmp;
+		}
+		result = current;
+		return result;
+	}
+
 	private static List convertToList(int no) {
 		List head = null;
 		while(no>0) {
 			int digit = no%10;
-			insert(digit, head);
+			head = insert(digit, head);
 			no = no/10;
 		}
 		return head;
 	}
 
-	private static void insert(int digit, List head) {
+	private static List insert(int digit, List head) {
 		if(head == null) {
 			head = new List();
 			head.data = digit;
-			return;
 		}
 		else {
 			List node = new List();
@@ -30,13 +58,14 @@ public class HugeFactorial {
 				tmp = tmp.next;
 			tmp.next = node;
 		}
+		return head;
 	}
 	
 	private static List multiply(List firstNumber, List secondNumber) {
-		List result = new List();
+		List result = null;
+		List currRef = null;
 		int secondNumberDigits = 0;
 		while(secondNumber != null) {
-			secondNumberDigits++;
 			List firstTmp = firstNumber;
 			int carry = 0;
 			while(firstTmp != null) {
@@ -46,40 +75,58 @@ public class HugeFactorial {
 					digit = digit%10;
 				}
 				if(secondNumberDigits == 0)
-					insert(digit, result);
+					result = insert(digit, result);
 				else 
-					addToExisting(digit, secondNumberDigits, result);
+					currRef = addToExisting(digit, currRef, result);
 				
 				firstTmp = firstTmp.next;
 			}
+			if(carry>0) {
+				if(secondNumberDigits == 0)
+					result = insert(carry, result);
+				else
+					currRef = addToExisting(carry, currRef, result);
+			}
 			
 			secondNumber = secondNumber.next;
+			secondNumberDigits++;
+			int no=secondNumberDigits;
+			currRef = result;
+			
+			while(no>0 && currRef != null) {
+				currRef = currRef.next;
+				no--;
+			}
 		}
+		return result;
 	}
 
-	private static void addToExisting(int digit, int secondNumberDigits, List result) {
-		List head = result;
-		while(secondNumberDigits>0) {
-			result = result.next;
-			secondNumberDigits--;
-		}
+	private static List addToExisting(int digit, List currRef, List result) {
+		List head = currRef;
 		int sum, carry = 0;
-		while(result != null && (sum=result.data+digit)>9) {
-			result.data = sum%10 + carry;
+		while(currRef != null && (sum=currRef.data+digit)>9) {
+			currRef.data = sum%10 + carry;
 			carry = sum/10;
 			digit = carry;
-			result = result.next;
+			currRef = currRef.next;
 		}
 		
-		if(result != null) {
-			result.data = result.data+digit;
-			return;
+		if(currRef != null) {
+			currRef.data = currRef.data+digit;
 		}
 		else {
-			insert(digit, head);
+			currRef = insert(digit, result);
+			return currRef;
 		}
-		
-		
+		return currRef.next;
+	}
+	
+	
+	private static void displayList(List head) {
+		while(head != null) {
+			System.out.print(head.data);
+			head = head.next;
+		}
 	}
 
 }
@@ -89,4 +136,3 @@ class List {
 	int data;
 	List next;
 }
-
