@@ -1,24 +1,31 @@
 package com.example.multithreading.factorial;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.CountDownLatch;
-
 import com.example.multithreading.factorial.Factorial.List;
 
-public class Runner implements Callable<List> {
+public class Runner extends Thread {
 	
 	int first;
-	CountDownLatch latch;
 	
-	Runner(int first, CountDownLatch latch) {
+	public List result = null;
+
+	Runner(int first) {
 		this.first = first;
-		this.latch = latch;
 	}
 
+	
+	public List getResult() {
+		return result;
+	}
+	
+	public void setResult(List result) {
+		this.result = result;
+	}
+
+
 	@Override
-	public List call() throws Exception {
+	public void run() {
 		
-		int last = first + 19999;
+		int last = first + 199;
 		List firstNumber = Factorial.convertToList(first);
 		List secondNumber = Factorial.convertToList(first+1);
 		
@@ -28,9 +35,8 @@ public class Runner implements Callable<List> {
 			firstNumber = Factorial.convertToList(no);
 			no++;
 		}
-		
-		latch.countDown();
-		return Factorial.reverseList(secondNumber);
+
+		setResult(secondNumber);
 	}
 
 
