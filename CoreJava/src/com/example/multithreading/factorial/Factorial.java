@@ -1,28 +1,13 @@
-import java.util.Scanner;
+package com.example.multithreading.factorial;
 
-public class HugeFactorial {
-
-	public static void main(String[] args) {
-		
-		Scanner scan = new Scanner(System.in);
-		int number = scan.nextInt();
-		List firstNumber = convertToList(1);
-		List secondNumber = convertToList(2);
-		
-		int no = 3; 
-		while(no <= number+1) {
-			secondNumber = multiply(secondNumber, firstNumber);
-			firstNumber = convertToList(no);
-			no++;
-		}
+public class Factorial {
 	
-		List result = reverseList(secondNumber);
-		displayList(result);
-		scan.close();
-
+	static class List {
+		int data;
+		List next;
 	}
 	
-	private static List reverseList(List result) {
+	public static List reverseList(List result) {
 		List current = result;
 		List next = current.next;
 			
@@ -39,7 +24,7 @@ public class HugeFactorial {
 		return result;
 	}
 
-	private static List convertToList(int no) {
+	public static List convertToList(int no) {
 		List head = null;
 		while(no>0) {
 			int digit = no%10;
@@ -49,7 +34,7 @@ public class HugeFactorial {
 		return head;
 	}
 
-	private static List insert(int digit, List head) {
+	public static List insert(int digit, List head) {
 		if(head == null) {
 			head = new List();
 			head.data = digit;
@@ -65,7 +50,7 @@ public class HugeFactorial {
 		return head;
 	}
 	
-	private static List multiply(List firstNumber, List secondNumber) {
+	public static List multiply(List firstNumber, List secondNumber) {
 		
 		if(firstNumber == null || secondNumber == null) {
 			if(firstNumber == null)
@@ -120,7 +105,7 @@ public class HugeFactorial {
 	}
 
 
-	private static List addToExisting(int digit, List currRef, List result) {
+	public static List addToExisting(int digit, List currRef, List result) {
 		List head = currRef;
 		int sum, carry = 0;
 		while(currRef != null && (sum=currRef.data+digit)>9) {
@@ -140,16 +125,10 @@ public class HugeFactorial {
 	}
 	
 	
-	private static void displayList(List head) {
+	public static void displayList(List head) {
 		while(head != null) {
 			System.out.print(head.data);
 			head = head.next;
 		}
 	}
-}
-
-
-class List {
-	int data;
-	List next;
 }
